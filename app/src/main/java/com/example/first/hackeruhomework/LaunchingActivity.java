@@ -37,13 +37,13 @@ public class LaunchingActivity extends AppCompatActivity {
 //    }
 
     private void sendToSignUp(){
-        Intent intent = new Intent(LaunchingActivity.this, null);
+        Intent intent = new Intent(LaunchingActivity.this, SignupActivity.class);
         startActivity(intent);//sends user to set activity in intent
         finish();//deletes activity from stack
     }
 
     private void sendToContacts(){
-        Intent intent = new Intent(LaunchingActivity.this, null);
+        Intent intent = new Intent(LaunchingActivity.this, ContactsActivity.class);
         startActivity(intent);
         finish();
     }
