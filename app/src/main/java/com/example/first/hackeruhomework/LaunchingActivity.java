@@ -1,23 +1,37 @@
 package com.example.first.hackeruhomework;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class LaunchingActivity extends AppCompatActivity {
+    Runnable runnable2;
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (checkLoggedIn()) {
-            sendToContacts();
-        } else {
-            sendToSignUp();
-        }
+        final Handler handler = new Handler();
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (checkLoggedIn()) {
+                    sendToContacts();
+                } else {
+                    sendToSignUp();
+                }
+            }
+        };
+
+        handler.postDelayed(runnable, 3000);
+
+        handler.removeCallbacks(runnable);
     }
 
     private boolean checkLoggedIn(){
