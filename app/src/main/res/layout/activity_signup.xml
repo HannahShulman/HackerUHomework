@@ -4,6 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="24dp"
     tools:context=".SignupActivity">
 
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="textPersonName"
+        android:hint="@string/name"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="377dp" />
+
+    <EditText
+        app:layout_constraintStart_toStartOf="@+id/editTextName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName"
+        app:layout_constraintEnd_toEndOf="@+id/editTextName"
+        android:layout_marginTop="40dp"
+        android:id="@+id/editTextPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="452dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:id="@+id/signup_btn"
+        android:text="@string/sign_up"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
