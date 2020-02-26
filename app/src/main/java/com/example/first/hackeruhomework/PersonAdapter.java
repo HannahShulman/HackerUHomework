@@ -1,5 +1,6 @@
 package com.example.first.hackeruhomework;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonViewHolder> {
     @Override
     public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.tall_recycler_cell, parent, false);
+                .inflate(R.layout.short_recycler_cell, parent, false);
         return new PersonViewHolder(view);
     }
 
@@ -26,6 +27,10 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonViewHolder> {
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
 //        holder.textView.setText(holder.toString() +" Position: "+position);
         Person currentPerson = personList.get(position);
+        if (position%2 == 0)
+            holder.textView.setBackgroundColor(Color.RED);
+        else
+            holder.textView.setBackgroundColor(Color.WHITE);
         holder.textView.setText("First Name: "+currentPerson.getName()+"  Last Name: "+ currentPerson.getLastName());
     }
 
