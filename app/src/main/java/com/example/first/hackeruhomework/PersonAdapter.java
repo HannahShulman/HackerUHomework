@@ -19,9 +19,23 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonViewHolder> {
     @NonNull
     @Override
     public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.short_recycler_cell, parent, false);
-        return new PersonViewHolder(view);
+        View view;
+        if (viewType == 0) {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.short_recycler_cell, parent, false);
+            return new PersonViewHolder(view);
+        } else {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.tall_recycler_cell, parent, false);
+            return new PersonViewHolder2(view);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (personList.get(position).getGender() == 'M'
+                || personList.get(position).getGender() == 'm') return 0;
+        return 1;
     }
 
     @Override
@@ -40,13 +54,12 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonViewHolder> {
         } else {
             holder.textView.setBackgroundColor(Color.BLUE);
         }
+        holder.textView.setText("First Name: "+person.getName()+"  Last Name: "
+                + person.getLastName()+"  age: "+person.getAge());
 
-//        Person currentPerson = personList.get(position);
-//        if (position%2 == 0)
-//            holder.textView.setBackgroundColor(Color.RED);
-//        else
-//            holder.textView.setBackgroundColor(Color.WHITE);
-        holder.textView.setText("First Name: "+person.getName()+"  Last Name: "+ person.getLastName()+"  age: "+person.getAge());
+        if (holder instanceof PersonViewHolder2){
+            ((PersonViewHolder2) holder).view.setBackgroundColor(Color.MAGENTA);
+        }
     }
 
     @Override
@@ -76,5 +89,15 @@ class PersonViewHolder extends RecyclerView.ViewHolder {
     public PersonViewHolder(@NonNull View itemView) {
         super(itemView);
         textView = itemView.findViewById(R.id.contact_name);
+    }
+}
+
+class PersonViewHolder2 extends PersonViewHolder {
+
+    View view;
+
+    public PersonViewHolder2(@NonNull View itemView) {
+        super(itemView);
+        view = itemView.findViewById(R.id.seperator);
     }
 }
