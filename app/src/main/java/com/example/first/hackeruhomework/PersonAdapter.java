@@ -67,10 +67,15 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonViewHolder> {
         return personList.size();
     }
 
+    public void addPerson(Person person){
+        personList.add(person);
+        notifyDataSetChanged();
+    }
+
 
     private ArrayList<Person> getPersons(){
         ArrayList<Person> personList = new ArrayList<Person>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1; i++) {
             int age = new Random().nextInt(100);
             char gender = (i%2 == 0)? 'm' : 'f';
             Person p = new Person("First "+i, "Last "+i);
