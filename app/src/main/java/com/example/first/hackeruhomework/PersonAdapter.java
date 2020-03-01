@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class PersonAdapter extends RecyclerView.Adapter<PersonViewHolder> {
 
@@ -26,12 +27,26 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
 //        holder.textView.setText(holder.toString() +" Position: "+position);
-        Person currentPerson = personList.get(position);
-        if (position%2 == 0)
+        Person person = personList.get(position);
+        boolean isMale = person.getGender() == 'M' || person.getGender() == 'm';
+        boolean isRetired = person.getAge() >=67 || (!isMale && person.getAge() >= 65);
+
+        if (isMale && isRetired) {//all males
             holder.textView.setBackgroundColor(Color.RED);
-        else
-            holder.textView.setBackgroundColor(Color.WHITE);
-        holder.textView.setText("First Name: "+currentPerson.getName()+"  Last Name: "+ currentPerson.getLastName());
+        } else if (isMale) {
+            holder.textView.setBackgroundColor(Color.YELLOW);
+        } else if (isRetired) {//all females by contract can have two values
+            holder.textView.setBackgroundColor(Color.GREEN);
+        } else {
+            holder.textView.setBackgroundColor(Color.BLUE);
+        }
+
+//        Person currentPerson = personList.get(position);
+//        if (position%2 == 0)
+//            holder.textView.setBackgroundColor(Color.RED);
+//        else
+//            holder.textView.setBackgroundColor(Color.WHITE);
+        holder.textView.setText("First Name: "+person.getName()+"  Last Name: "+ person.getLastName()+"  age: "+person.getAge());
     }
 
     @Override
@@ -43,7 +58,12 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonViewHolder> {
     private ArrayList<Person> getPersons(){
         ArrayList<Person> personList = new ArrayList<Person>();
         for (int i = 0; i < 100; i++) {
-            personList.add(new Person("First "+i, "Last "+i));
+            int age = new Random().nextInt(100);
+            char gender = (i%2 == 0)? 'm' : 'f';
+            Person p = new Person("First "+i, "Last "+i);
+            p.setAge(age);
+            p.setGender(gender);
+            personList.add(p);
         }
         return personList;
     }
